@@ -81,41 +81,76 @@ class Monster:
         else:
             print(f"{self.type} now has {self.health} health.")
 
-    def third(self):
-        pass
+    def deal_damage(self, target):
+        damage_amount = 0
+        target.take_damage(damage_amount)
 
     def __repr__(self):
         return "This is the Monster Class"
 
-pc_name_input = str(input("Enter your characters name and hit enter:\n\n"))
+## STARTING ROOM ##
+"You blearily open your eyes. Your head is throbbing, as if it'd been rung repeatedly against something."
+
+## COLLECTING CHARACTER INFO AND CREATING OBJECT ##
+pc_name_input = input("\nEnter your characters name and hit enter:\n\n")
 lowered_name = pc_name_input.lower()
 final_name = lowered_name.title()
 
-pc_class_input = str(input("Enter your desired character class and hit enter:\n\n"))
+pc_class_input = input("\nEnter your desired character class and hit enter:\n\n")
 lowered_class = pc_class_input.lower()
 final_class = lowered_class.title()
 
-pc_level_input = input("If you are creating a character above Level 1, enter your desired level in numeric form, otherwise just hit enter to continue\n\n")
+pc_level_input = input("\nIf you are creating a character above Level 1, enter your desired level in numeric form, otherwise just hit enter to continue\n\n")
 if pc_level_input == '':
     completed_PC_1 = PC(final_name, final_class)
 else:
     final_level = int(pc_level_input)
     completed_PC_1 = PC(final_name, final_class, final_level)
 
-sara = PC("Sara", "Monk")
-jim = PC("Jim", "Barbarian")
+## ROOM  1 ##:
+"\nThis is a plain square room made of cool, smooth, dark stone"
 
-zombie = Monster("Zombie", 1)
+## ROOM  2 ##:
+## ROOM  3 ##:
+## ROOM  4 ##:
+## ROOM  5 ##:
+## ROOM  6 ##:
+## ROOM  7 ##:
+## ROOM  8 ##:
+## ROOM  9 ##:
+## ROOM 10 ##:
+## EXIT SEQUENCE ##:
+'''10 room text dungeon crawl. 10 rooms, 10 monsters of increasing difficulty.
+    
+    Room 1
+    Room 2
+    Room 3
+    Room 4
+    Room 5
+    Room 6
+    Room 7
+    Room 8
+    Room 9
+    Room 10
+
+'''
 
 
-print("Character Info: \n" + str(completed_PC_1))
-print("Armor Class: " + str(completed_PC_1.armor_class))
-print("Character Name: " + completed_PC_1.name)
-print("Character Level: " + str(completed_PC_1.level))
-print("Character Class: " + str(completed_PC_1.clas))
-print("Max Health: " + str(completed_PC_1.max_health))
-print("Current Health: " + str(completed_PC_1.health))
-print("Character Ability Scores: \n" + str(completed_PC_1.abilities.abilities))
+
+
+#sara = PC("Sara", "Monk")
+#jim = PC("Jim", "Barbarian")
+
+#zombie = Monster("Zombie", 1)
+
+#print("Character Info: \n" + str(completed_PC_1))
+#print("Armor Class: " + str(completed_PC_1.armor_class))
+#print("Character Name: " + completed_PC_1.name)
+#print("Character Level: " + str(completed_PC_1.level))
+#print("Character Class: " + str(completed_PC_1.clas))
+#print("Max Health: " + str(completed_PC_1.max_health))
+#print("Current Health: " + str(completed_PC_1.health))
+#print("Character Ability Scores: \n" + str(completed_PC_1.abilities.abilities))
 #print("\n")
 #print(sara)
 #print(sara.name)
