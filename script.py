@@ -1,10 +1,10 @@
-import ability_modifiers as abil_mods
+import abilities_class as abil_class
 import dice as d
 import classes as cls
 
 class PC:
     def __init__(self, name, class_name, level=1):
-        self.abilities = abil_mods.Abilities()
+        self.abilities = abil_class.Abilities()
         self.name = name
         self.level = level
         self.clas = cls.class_obj_dict[class_name]
@@ -89,7 +89,7 @@ class Monster:
         return "This is the Monster Class"
 
 ## STARTING ROOM ##
-"You blearily open your eyes. Your head is throbbing, as if it'd been rung repeatedly against something."
+print("\nYou blearily open your eyes. Your head is throbbing, as if it's been rung repeatedly against something.\nWho are you?") 
 
 ## COLLECTING CHARACTER INFO AND CREATING OBJECT ##
 pc_name_input = input("\nEnter your characters name and hit enter:\n\n")
@@ -107,36 +107,26 @@ else:
     final_level = int(pc_level_input)
     completed_PC_1 = PC(final_name, final_class, final_level)
 
+print("\nYou shakily pull yourself off the wet floor to your feet. You don't recognize the room you're standing in and you don't remember how you got here.\nYou should try to find a way out.")
+print("The room yor're in is dark and there's a dripping sound coming from the corner. You can make out a doorway in the wall accros from you.")
+
 ## ROOM  1 ##:
-"\nThis is a plain square room made of cool, smooth, dark stone"
+"\nThis is a plain square room made of smooth, cool, dark stone"
 
 ## ROOM  2 ##:
 ## ROOM  3 ##:
 ## ROOM  4 ##:
 ## ROOM  5 ##:
-## ROOM  6 ##:
-## ROOM  7 ##:
-## ROOM  8 ##:
-## ROOM  9 ##:
-## ROOM 10 ##:
 ## EXIT SEQUENCE ##:
-'''10 room text dungeon crawl. 10 rooms, 10 monsters of increasing difficulty.
-    
+'''5 room text dungeon crawl. 5 rooms, 5 monsters of increasing difficulty.
+    starting area
     Room 1
     Room 2
     Room 3
     Room 4
     Room 5
-    Room 6
-    Room 7
-    Room 8
-    Room 9
-    Room 10
-
+    exit sequence
 '''
-
-
-
 
 #sara = PC("Sara", "Monk")
 #jim = PC("Jim", "Barbarian")

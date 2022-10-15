@@ -1,4 +1,4 @@
-import random
+import dice as d
 
 class Abilities:
     def __init__(self):
@@ -21,14 +21,11 @@ class Abilities:
             range(30, 30):  +10
         }
 
-        def calc_ability_score(num_of_dice=4, number_of_sides=6):
-            four_dice = []
+        def calc_ability_score(num_of_dice=4, die_obj=d.d6):
+            four_dice = die_obj.roll(num_of_dice)
             total = 0
-            for die in range(1, num_of_dice+1):
-                die_roll = random.randint(1, number_of_sides)
-                four_dice.append(die_roll)
             #print(four_dice)
-            smallest_die = number_of_sides
+            smallest_die = die_obj.sides
             for die in four_dice:
                 if die < smallest_die:
                     smallest_die = die
@@ -37,14 +34,14 @@ class Abilities:
             #print(three_dice)
             for die in three_dice:
                 total += die
+            #print(total)
             return total
 
         def calc_ability_modifier(ability_score):
             for score_range in scores_and_mods:
                 if ability_score in score_range:
-                    modifier = scores_and_mods[ability_score]
+                    modifier = scores_and_mods[score_range]
                     return modifier
-        
         
         self.str_score = calc_ability_score()
         self.dex_score = calc_ability_score()
@@ -52,8 +49,6 @@ class Abilities:
         self.int_score = calc_ability_score()
         self.wis_score = calc_ability_score()
         self.cha_score = calc_ability_score()
-
-        
 
         self.str_mod = calc_ability_modifier(self.str_score)
         self.dex_mod = calc_ability_modifier(self.dex_score)
@@ -70,9 +65,9 @@ class Abilities:
             "Wisdom":       {self.wis_score: self.wis_mod},
             "Charisma":     {self.cha_score: self.cha_mod}
         }      
-            
 
-person_1_abilities = Abilities()
-person_2_abilities = Abilities()
+person_1_abilities_test = Abilities()
+person_2_abilities_test = Abilities()
 
-print(person_1_abilities)
+#print(person_1_abilities_test.ability_scores)
+#print(person_2_abilities_test.ability_scores)

@@ -22,11 +22,7 @@ class Class:
   def __repr__(self):
     return f"This is the {self.class_name} class. It's hit die is a d{self.hit_die.sides}."
 
-class Barbarian(Class):
-  def __init__(self, class_name):
-    super().__init__(class_name)
-
-
+#class Barbarian(Class):
 
 barbarian = Class("Barbarian")
 bard = Class("Bard")
@@ -43,7 +39,7 @@ wizard = Class("Wizard")
 
 #print(barbarian)
 
-class_list = [
+"""class_list = [
   barbarian,
   bard,
   cleric,
@@ -56,24 +52,24 @@ class_list = [
   sorcerer,
   warlock,
   wizard
-]
+]"""
 
 class_obj_dict = {
   "Barbarian": barbarian,
   "Bard": bard,
   "Cleric": cleric,
-  "Druid": Class("Druid"),
-  "Fighter": Class("Fighter"),
-  "Monk": Class("Monk"),
-  "Paladin": Class("Paladin"),
-  "Ranger": Class("Ranger"),
-  "Rogue": Class("Rogue"),
-  "Sorcerer": Class("Sorcerer"),
-  "Warlock": Class("Warlock"),
-  "Wizard": Class("Wizard")
+  "Druid": druid,
+  "Fighter": fighter,
+  "Monk": monk,
+  "Paladin": paladin,
+  "Ranger": ranger,
+  "Rogue": rogue,
+  "Sorcerer": sorcerer,
+  "Warlock": warlock,
+  "Wizard": wizard
 }
 
-class_obj_dict = {
+"""class_obj_dict = {
   "Barbarian": Class("Barbarian"),
   "Bard": Class("Bard"),
   "Cleric": Class("Cleric"),
@@ -86,6 +82,5 @@ class_obj_dict = {
   "Sorcerer": Class("Sorcerer"),
   "Warlock": Class("Warlock"),
   "Wizard": Class("Wizard")
-}
-
+}"""
 #class_obj_dict["Fighter".lower()]

@@ -5,12 +5,11 @@ class Die:
         self.sides = num_of_sides
 
     def roll(self, num_of_dice=1):
-        self.sides
-        total = []
-        for die in range(num_of_dice):
+        list_of_results= []
+        for die in range(1, num_of_dice+1):
             roll_result = random.randint(1, self.sides)
-            total.append(roll_result)
-        return total
+            list_of_results.append(roll_result)
+        return list_of_results
     
     def __repr__(self) -> str:
         return f"This is a d{self.sides}"
@@ -23,4 +22,5 @@ d12 = Die(12)
 d20 = Die(20)
 d100 = Die(100)
 
-#print(d4)
+#print(d6.roll(4))
+
