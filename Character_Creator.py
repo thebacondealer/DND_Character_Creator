@@ -1,129 +1,118 @@
-import abilities_class as abil_class
-import dice as d
-import classes as cls
+import abilities_class_current as abil_clas
+import Custom_Errors as CE
+import DnD_Classes as cls
 
+
+# Define the PC class
 class PC:
     def __init__(self, name, class_name, level=1):
-        self.abilities = abil_class.Abilities()
-        self.name = name
-        self.level = level
-        self.clas = cls.class_obj_dict[class_name]
-        self.max_health = level * (self.clas.hit_die.sides + self.abilities.con_mod)
-        self.health = self.max_health
-        self.armor_class = 10 + self.abilities.dex_mod
-        self.is_conscious = True
+        self.abil_cls_obj = abil_clas.Abilities()  # Create an instance of the Abilities class
+        self.name = name  # Assign the character's name
+        self.level = level  # Assign the character's level
+        self.clas = cls.class_obj_dict[class_name]  # Assign the character's class from the class dictionary
+        self.max_health = level * (self.clas.hit_die.sides + self.abil_cls_obj.con_mod)  # Calculate the character's maximum health
+        self.health = self.max_health  # Assign the character's current health
+        self.armor_class = 10 + self.abil_cls_obj.dex_mod  # Calculate the character's armor class
+        self.is_conscious = True  # Assign a flag indicating if the character is conscious
 
     def __repr__(self):
-        return f"This is {self.name}, a level {self.level} {self.clas.class_name}. They have {self.health} hit points remaining." #using one[1] 's' for sake of syntax
-
-    
-## PROGRAM START ##
-desired_funtion = input("\nWould you like to use the Character Creator, or, play the Dungeon?\n\n")
-lowered_func = desired_funtion.lower()
-
-if lowered_func == "dungeon":
-    import Dungeon
-    Dungeon
-elif lowered_func == "character creator" or "cc":
-    pass
+        return f"This is {self.name}, a level {self.level} {self.clas.class_name}. They have {self.health} hit points remaining."
 
 ## COLLECTING CHARACTER INFO AND CREATING OBJECT ##
-def create_character():
-    pc_name_input = input("\nEnter your characters name and hit enter:\n\n")
-    lowered_name = pc_name_input.lower()
-    final_name = lowered_name.title()
-    
-    pc_class_input = input("\nEnter your desired character class and hit enter:\n\n")
-    lowered_input = pc_class_input.lower()
-    lowered_class = cls.class_list
 
-    if lowered_input not in lowered_class:
-        print("Invalid Input, Please Try Again")
-        #pc_class_input = input("\nEnter your desired character class and hit enter:\n\n")
-    else:
-        final_class = lowered_input.title()
+# Function to get the character's name
+def get_character_name():
+    pc_name_input = input("\nEnter your character's name and hit enter:\n\n")
+    return pc_name_input.strip().title()
 
+# Function to validate the character's class input
+def validate_class_input(pc_class_input):
+    return str(pc_class_input).title() in cls.class_obj_dict
+
+# Function to get the character's class
+def get_character_class():
+    while True:
+        try:
+            pc_class_input = input("\nEnter your desired character class and hit enter:\n\n")
+            if validate_class_input(pc_class_input):
+                return pc_class_input.title()
+            elif not validate_class_input(pc_class_input):
+                raise CE.InvalidInput
+        except CE.InvalidInput:
+            print("Invalid Input, Please Try Again")
+        else:
+            break
+
+# Function to get the character's level
+def get_character_level():
     pc_level_input = input("\nIf you are creating a character above Level 1, enter your desired level in numeric form, otherwise just hit enter to continue\n\n")
-    if pc_level_input == '':
-        self_PC = PC(final_name, final_class)
+    return int(pc_level_input) if pc_level_input else 1
+
+# Function to create the character object
+def create_character():
+    character_name = get_character_name()
+    character_class = get_character_class()
+    character_level = get_character_level()
+    return PC(character_name, character_class, character_level)
+
+# Function to print the available commands
+def print_available_commands():
+    print("\nAvailable Commands:")
+    print("1. Show Name")
+    print("2. Show Level")
+    print("3. Show Class")
+    print("4. Show Max Health")
+    print("5. Show Current Health")
+    print("6. Show Armor Class")
+    print("7. Show Ability Scores")
+    print("8. Show Available Commands")
+    print("9. Exit")
+
+# Function to process the user's input
+def process_user_input(user_input, self_PC):
+    if user_input == "1":
+        print("\nName:", self_PC.name)
+    elif user_input == "2":
+        print("\nLevel:", self_PC.level)
+    elif user_input == "3":
+        print("\nClass:", self_PC.clas)
+    elif user_input == "4":
+        print("\nMax Health:", self_PC.max_health)
+    elif user_input == "5":
+        print("\nCurrent Health:", self_PC.health)
+    elif user_input == "6":
+        print("\nArmor Class:", self_PC.armor_class)
+    elif user_input == "7":
+        print("\nAbility Scores:")
+        for score_set in self_PC.abil_cls_obj.ability_scores.items():
+            print(score_set[0] + ":", score_set[1])
+    elif user_input == "8":
+        print_available_commands()
+    elif user_input == "9":
+        exit()
     else:
-        final_level = int(pc_level_input)
-        self_PC = PC(final_name, final_class, final_level)
-    return self_PC
+        print("Invalid Command")
 
-self_PC = create_character()
+# Function to welcome the user
+def welcome_user():
+    print("\nWelcome to the Character Creation program!")
+    print("Let's create and view your D&D character.")
+    print("--------------------------------------")
 
-def print_name():
-    print("Your name is: " + self_PC.name)
+# Main program entry point
+def main():
+    welcome_user()
+    # Create the character
+    self_PC = create_character()
+    
+    #Shows Command Menu for the first time
+    print_available_commands()
 
-def print_abilities():
-    print(self_PC.abilities)
+    #Main program loop
+    while True:
+        user_input = input("\nEnter a command number: ")
+        process_user_input(user_input, self_PC)
 
-def print_level():
-    print("You are level " + str(self_PC.level))
-
-def print_class():
-    print(self_PC.clas)
-
-def print_max_health():
-    print(self_PC.max_health)
-
-def print_health():
-    print(self_PC.health)
-
-def print_armor_class():
-    print(self_PC.armor_class)
-
-def print_character():
-    print(self_PC)
-
-def run_menu():
-        print("Available Commands:\n")
-        
-        available_commands = {
-            "Show Name": print_name(), 
-            "Show Abilities": print_abilities(),
-            "Show Level": print_level(),
-            "Show Class": print_class(),
-            "Show Max Health": print_max_health(),
-            "Show Health": print_health(),
-            "Show Armor Class": print_armor_class(),
-            "Show Character": print_character(),
-            "\nCreate New Character": create_character(),
-            "\n\nExit": exit()
-        }
-
-        #print(stringavailable_commands.keys())
-
-        """get_command = input("Input a Command\n\n")
-        lowered_command = get_command.lower()
-        if lowered_command in available_commands:
-            for command in available_commands:
-                if lowered_command in command:
-                    available_commands[command]
-            
-        elif lowered_command == "exit":
-            exit()"""
-
-#run_menu()
-#sara = PC("Sara", "Monk")
-#jim = PC("Jim", "Barbarian")
-
-#zombie = Monster("Zombie", 1)
-
-#print("Character Info: \n" + str(completed_PC_1))
-#print("Armor Class: " + str(completed_PC_1.armor_class))
-#print("Character Name: " + completed_PC_1.name)
-#print("Character Level: " + str(completed_PC_1.level))
-#print(str(self_PC.clas))
-#print("Max Health: " + str(completed_PC_1.max_health))
-#print("Current Health: " + str(completed_PC_1.health))
-print(str(self_PC.abilities))
-#print("\n")
-#print(sara)
-#print(sara.name)
-#print(sara.level)
-#print(sara.clas)
-#print(sara.max_health)
-#print(self_PC.health)
-#print(sara.abilities.abilities)
+# Call the main function to start the program
+if __name__ == "__main__":
+    main()

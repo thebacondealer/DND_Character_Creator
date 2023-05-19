@@ -1,5 +1,6 @@
 import random
 
+
 class Die:
     def __init__(self, num_of_sides):
         self.sides = num_of_sides

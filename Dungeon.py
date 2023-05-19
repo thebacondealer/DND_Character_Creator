@@ -3,45 +3,45 @@
 def level_up(self):
         self.level += 1
 
-    def conscious(self):
-        self.is_conscious = True
-        if self.health == 0:
-            self.health = 1
-        print(f"{self.name} is conscious!")
+def conscious(self):
+    self.is_conscious = True
+    if self.health == 0:
+        self.health = 1
+    print(f"{self.name} is conscious!")
 
-    def unconscious(self):
-        self.is_conscious = False
-        if self.health != 0:
-            self.health = 0
-        print(f"{self.name} is unconscious!")
+def unconscious(self):
+    self.is_conscious = False
+    if self.health != 0:
+        self.health = 0
+    print(f"{self.name} is unconscious!")
 
-    def heal(self, amount):
-        if self.health == 0:
-            self.is_conscious = True    
-        self.health += amount
-        if self.health >= self.max_health:
-            self.health = self.max_health
+def heal(self, amount):
+    if self.health == 0:
+        self.is_conscious = True    
+    self.health += amount
+    if self.health >= self.max_health:
+        self.health = self.max_health
+    print(f"{self.name} now has {self.health} health.")
+
+def take_damage(self, amount):
+    self.health -= amount
+    if self.health <= 0:
+        self.health = 0
+        self.is_conscious == False
+    else:
         print(f"{self.name} now has {self.health} health.")
-    
-    def take_damage(self, amount):
-        self.health -= amount
-        if self.health <= 0:
-            self.health = 0
-            self.is_conscious == False
-        else:
-            print(f"{self.name} now has {self.health} health.")
-    
-    def deal_damage(self, target):
-        damage_amount = 0
-        target.take_damage(damage_amount)
-    
-    def attack(self, target):
-        if self.is_conscious == False:
-            print(f"{self.name} can't attack because they are unconscious!")
-        else:
-            attack_roll = d.d20.roll
-            if attack_roll >= target.armor_class:
-                self.deal_damage(target)
+
+def deal_damage(self, target):
+    damage_amount = 0
+    target.take_damage(damage_amount)
+
+def attack(self, target):
+    if self.is_conscious == False:
+        print(f"{self.name} can't attack because they are unconscious!")
+    else:
+        attack_roll = d.d20.roll
+        if attack_roll >= target.armor_class:
+            self.deal_damage(target)
 
 class Monster:
     def __init__(self, monster_type, level):
@@ -102,11 +102,11 @@ print("The room yor're in is dark and there's a dripping sound coming from the c
 ## ROOM  4 ##:
 ## ROOM  5 ##:
 ## EXIT SEQUENCE ##:
-'''5 room text dungeon crawl. 5 rooms, 5 monsters of increasing difficulty.
-    starting area
-    Room 1
-    Room 2
-    Room 3
-    Room 4
-    Room 5
-    exit sequence
+#'''5 room text dungeon crawl. 5 rooms, 5 monsters of increasing difficulty.
+#   starting area
+#    Room 1
+#    Room 2
+#    Room 3
+#    Room 4
+#    Room 5
+#    exit sequence
