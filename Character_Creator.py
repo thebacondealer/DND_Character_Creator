@@ -6,13 +6,13 @@ import DnD_Classes as cls
 # Define the PC class
 class PC:
     def __init__(self, name, class_name, level=1):
-        self.abil_cls_obj = abil_clas.Abilities()  # Create an instance of the Abilities class
+        self.abil_cls_obj = abil_clas.Abilities().ability_scores  # Create an instance of the Abilities class
         self.name = name  # Assign the character's name
         self.level = level  # Assign the character's level
         self.clas = cls.class_obj_dict[class_name]  # Assign the character's class from the class dictionary
-        self.max_health = level * (self.clas.hit_die.sides + self.abil_cls_obj.con_mod)  # Calculate the character's maximum health
+        self.max_health = level * (self.clas.hit_die.sides + self.abil_cls_obj["Constitution"]['modifier'])  # Calculate the character's maximum health
         self.health = self.max_health  # Assign the character's current health
-        self.armor_class = 10 + self.abil_cls_obj.dex_mod  # Calculate the character's armor class
+        self.armor_class = 10 + self.abil_cls_obj["Dexterity"]['modifier']  # Calculate the character's armor class
         self.is_conscious = True  # Assign a flag indicating if the character is conscious
 
     def __repr__(self):
@@ -69,22 +69,22 @@ def print_available_commands():
     print("9. Exit")
 
 # Function to process the user's input
-def process_user_input(user_input, self_PC):
+def process_user_input(user_input, self_pc):
     if user_input == "1":
-        print("\nName:", self_PC.name)
+        print("\nName:", self_pc.name)
     elif user_input == "2":
-        print("\nLevel:", self_PC.level)
+        print("\nLevel:", self_pc.level)
     elif user_input == "3":
-        print("\nClass:", self_PC.clas)
+        print("\nClass:", self_pc.clas)
     elif user_input == "4":
-        print("\nMax Health:", self_PC.max_health)
+        print("\nMax Health:", self_pc.max_health)
     elif user_input == "5":
-        print("\nCurrent Health:", self_PC.health)
+        print("\nCurrent Health:", self_pc.health)
     elif user_input == "6":
-        print("\nArmor Class:", self_PC.armor_class)
+        print("\nArmor Class:", self_pc.armor_class)
     elif user_input == "7":
         print("\nAbility Scores:")
-        for score_set in self_PC.abil_cls_obj.ability_scores.items():
+        for score_set in self_pc.abil_cls_obj.items():
             print(score_set[0] + ":", score_set[1])
     elif user_input == "8":
         print_available_commands()
@@ -95,6 +95,7 @@ def process_user_input(user_input, self_PC):
 
 # Function to welcome the user
 def welcome_user():
+
     print("\nWelcome to the Character Creation program!")
     print("Let's create and view your D&D character.")
     print("--------------------------------------")
@@ -103,7 +104,7 @@ def welcome_user():
 def main():
     welcome_user()
     # Create the character
-    self_PC = create_character()
+    self_pc = create_character()
     
     #Shows Command Menu for the first time
     print_available_commands()
@@ -111,7 +112,7 @@ def main():
     #Main program loop
     while True:
         user_input = input("\nEnter a command number: ")
-        process_user_input(user_input, self_PC)
+        process_user_input(user_input, self_pc)
 
 # Call the main function to start the program
 if __name__ == "__main__":

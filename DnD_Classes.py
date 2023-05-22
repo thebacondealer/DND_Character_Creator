@@ -1,5 +1,6 @@
 import dice as d
 
+# Dictionary mapping class names to hit dice
 hit_dice_dict = {
     "Barbarian": d.d12,
     "Bard": d.d8,
@@ -15,14 +16,16 @@ hit_dice_dict = {
     "Wizard": d.d6
 }
 
+# Class representing a D&D class
 class Class:
     def __init__(self, class_name): 
-        self.hit_die = hit_dice_dict[class_name]
+        self.hit_die = hit_dice_dict[class_name]  # Get the hit dice from the dictionary
         self.class_name = class_name
 
     def __repr__(self):
         return f"This is the {self.class_name} class. Its hit die is a d{self.hit_die.sides}."
 
+# Instantiate Class objects for each D&D class
 barbarian = Class("Barbarian")
 bard = Class("Bard")
 cleric = Class("Cleric")
@@ -36,6 +39,7 @@ sorcerer = Class("Sorcerer")
 warlock = Class("Warlock")
 wizard = Class("Wizard")
 
+# List of available classes
 class_list = [
     "Barbarian",
     "Bard",
@@ -51,6 +55,7 @@ class_list = [
     "Wizard"
 ]
 
+# Dictionary mapping class names to Class objects
 class_obj_dict = {
     "Barbarian": barbarian,
     "Bard": bard,
@@ -79,5 +84,6 @@ class_obj_dict = {
 
 #print(class_obj_dict["Sorcerer"])
 # Output: This is the Sorcerer class. Its hit die is a d6.
+
 
 
